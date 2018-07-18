@@ -2,18 +2,16 @@
 
 # 콘솔 사용
 
-1. cd 이동할 폴더
+1. cd 이동할 폴더<br/>
   change directory
 
-2. dir 
+2. dir <br/>
   현재 폴더에 들어있는 파일들을 보여줌
   
-3. cd ..
+3. cd ..<br/>
   부모 폴더로 이동
   
-4. ls -al
-  
- 
+
   
 # 웹서버
 
@@ -189,7 +187,7 @@ data디렉토리에 있는 파일의 목록을 배열로 전달
 
 ## 글목록 출력하기
 
-     fs.readdir('./data', function(error, filelist){                                            //filelist
+          fs.readdir('./data', function(error, filelist){                                            //filelist
           var title = 'Welcome';
           var description = 'Hello, Node.js';
           
