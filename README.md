@@ -29,7 +29,7 @@ node.js는 웹서버로써 작동한다.
 
 http://sso.org:3000/main?id=HTML&page=12
 
-http               :  protocol<br />
+http<pre>    </pre>:  protocol<br />
 sso.org            :  host(domain)<br />
 3000               :  post<br />
 main               :  path<br />
