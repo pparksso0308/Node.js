@@ -28,13 +28,13 @@ node.js는 웹서버로써 작동한다.
 ## URL
 
 http://sso.org:3000/main?id=HTML&page=12
-
-http<pre>    </pre>:  protocol<br />
+<pre>
+http               :  protocol<br />
 sso.org            :  host(domain)<br />
 3000               :  post<br />
 main               :  path<br />
 id = HTML&page=12  :  query string<br />
- 
+</pre>
 query string에 따라 다른 정보가 화면에 나타난다.
 
 ## query string
