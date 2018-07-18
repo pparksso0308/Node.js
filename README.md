@@ -5,7 +5,7 @@
 1. cd 이동할 폴더<br/>
   change directory
 
-2. dir <br/>
+2. dir / ls<br/>
   현재 폴더에 들어있는 파일들을 보여줌
   
 3. cd ..<br/>
@@ -29,7 +29,7 @@ node.js는 웹서버로써 작동한다.
 
 http://sso.org:3000/main?id=HTML&page=12
 
-http     <\t>         : <\t> protocol<br />
+http     <'\t'>         : <\t> protocol<br />
 sso.org     <\t>       :  <\t>host(domain)<br />
 3000       <\t>        :  <\t>post<br />
 main        <\t>       : <\t> path<br />
