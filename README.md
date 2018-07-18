@@ -29,11 +29,11 @@ node.js는 웹서버로써 작동한다.
 
 http://sso.org:3000/main?id=HTML&page=12
 
-http              : protocol<br />
-sso.org           : host(domain)<br />
-3000              : post<br />
-main              : path<br />
-id = HTML&page=12 : query string<br />
+http     <\t>         : <\t> protocol<br />
+sso.org     <\t>       :  <\t>host(domain)<br />
+3000       <\t>        :  <\t>post<br />
+main        <\t>       : <\t> path<br />
+id = HTML&page=12 <\t> :  <\t>query string<br />
  
 query string에 따라 다른 정보가 화면에 나타난다.
 
