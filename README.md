@@ -58,7 +58,7 @@ url.parse() 메소드 : url을 분해해 각각 저장한다.
         var queryData = url.parse(_url, true).query;
         var title =queryData.id;
         console.log(queryData.id);
-        if(_url == '/'){                          // h1이 /이므로 처음 화면에서 title은 Welcom이 된다
+        if(_url == '/'){                                                            // h1이 /이므로 처음 화면에서 title은 Welcom이 된다
           title = 'Welcome';
         }
         if(_url == '/favicon.ico'){
@@ -88,9 +88,9 @@ url.parse() 메소드 : url을 분해해 각각 저장한다.
           </body>
           </html>
               `;
-              //console.log(__dirname +url);
-              response.end(template);               // 괄호안의 내용에 따라 사용자에게 전송하는 데이터가 바뀐다.
-           // 
+                                          
+              response.end(template);                                           // 괄호안의 내용에 따라 사용자에게 전송하는 데이터가 바뀐다.
+           
           });
           app.listen(3000);
 
@@ -141,7 +141,7 @@ url.parse() 메소드 : url을 분해해 각각 저장한다.
 
 
         if(pathname === '/'){                                       
-          fs.readFile(`data/${queryData.id}`, 'utf8', function(err, description){
+          fs.readFile(`data/${queryData.id}`, 'utf8', function(err, description){                   //description
             var template = `
             <!doctype html>
             <html>
@@ -157,7 +157,7 @@ url.parse() 메소드 : url을 분해해 각각 저장한다.
                 <li><a href="/?id=JavaScript">JavaScript</a></li>
               </ul>
               <h2>${title}</h2>
-              <p>${description}</p>
+              <p>${description}</p>                                                              // ${description} == 본문 출력
             </body>
             </html>
             `;
@@ -166,7 +166,7 @@ url.parse() 메소드 : url을 분해해 각각 저장한다.
           });
         } 
         
-        else {                                     // 오류 출력
+        else {                                                                                   // 오류 출력
           response.writeHead(404);
           response.end('Not found');          
         }
@@ -178,7 +178,7 @@ url.parse() 메소드 : url을 분해해 각각 저장한다.
 
 ## 파일의 목록 알아내기
 
-    var testFolder = './data';    // == data   
+    var testFolder = './data';                                                                   // == data   
     var fs = require('fs');       
 
     fs.readdir(testFolder, function(error, filelist){
@@ -189,7 +189,7 @@ data디렉토리에 있는 파일의 목록을 배열로 전달
 
 ## 글목록 출력하기
 
-     fs.readdir('./data', function(error, filelist){        //filelist
+     fs.readdir('./data', function(error, filelist){                                            //filelist
           var title = 'Welcome';
           var description = 'Hello, Node.js';
           
@@ -197,7 +197,7 @@ data디렉토리에 있는 파일의 목록을 배열로 전달
           
           var i = 0;
           while(i < filelist.length){
-            list = list + `<li><a href="/?id=${filelist[i]}">${filelist[i]}</a></li>`;    // filelist의 인자
+            list = list + `<li><a href="/?id=${filelist[i]}">${filelist[i]}</a></li>`;          // filelist의 인자
             i = i + 1;
           }
           list = list+'</ul>';
