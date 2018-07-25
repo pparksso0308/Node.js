@@ -12,8 +12,10 @@ node.js를 이용해 백엔드 기술을 제어할 수 있다.
 3. cd ..<br/>
   부모 폴더로 이동
   
+4. sudo<br/>
+  관리자 권한
+    
 
-  
 # 웹서버
 
 node.js는 웹서버로써 작동한다.
@@ -98,17 +100,15 @@ url.parse() 메소드 : url을 분해해 각각 저장한다.
     
  ## 파일 읽기
  
-    fs.readFile
- 
- 
-     const fs = require('fs');   //file system
+    * fs.readFile
+
+    const fs = require('fs');   //file system
     fs.readFile('sample.txt', function(err, data){
     console.log(data)
     });
  
  ## 파일로 본문 만들기
 
-  
      response.writeHead(200);
      fs.readFile(`data/${queryData.id}`,'utf8',function(err, description){
          var template = `
@@ -250,11 +250,10 @@ data디렉토리에 있는 파일의 목록을 배열로 전달
 
 ## pm2
 <pre>
-: pm2 monit
-: pm2 list
-: pm2 stop
-: pm2 restart
-: pm2 delete
+실행되고 있는 프로세스 목록 보기 : pm2 list
+파일 실행 중단                  : pm2 stop 파일이름
+실행                           : pm2 start 파일이름 --watch
+
 </pre>
 
 ## form
