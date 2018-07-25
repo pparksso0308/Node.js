@@ -201,3 +201,200 @@ data디렉토리에 있는 파일의 목록을 배열로 전달
             i = i + 1;
           }
           list = list+'</ul>';
+
+## 동기와 비동기
+
+*동기(synchronous) : 위에서 아래로
+
+    //readFileSync
+    console.log('A');
+    var result = fs.readFileSync('syntax/sample.txt', 'utf8');
+    console.log(result);
+    console.log('C');
+
+결과
+
+    A
+    B
+    C
+
+*비동기(asynchronous)
+
+    console.log('A');
+    fs.readFile('syntax/sample.txt', 'utf8', function(err, result){
+        console.log(result);
+    });
+    console.log('C');
+결과
+
+    A
+    C
+    B
+
+## callback
+
+    var a = function(){
+      console.log('A');
+    }
+
+
+    function slowfunc(callback){
+      callback();
+    }
+
+    slowfunc(a);
+
+결과
+ 
+    A
+
+## pm2
+<pre>
+: pm2 monit
+: pm2 list
+: pm2 stop
+: pm2 restart
+: pm2 delete
+</pre>
+
+## form
+
+    <form action="http://localhost:3000/process_create" method="post">
+      <!--method="post"는 query string을 숨김 -->
+
+      <!-- 사용자 입력 -->
+      <!-- 값들의 이름(control)이 있어야 서버에서 데이터를 받았을때 의미있게 처리할 수 있다. -->
+      <p>
+          <input type='text' name="title">
+      </p>
+      <!-- 여러줄 입력 -->
+      <p>
+          <textarea name "description"></textarea>
+      </p>
+      <!-- 전송    -->
+      <!-- 전송 후 query string 발생 -->
+      <p>
+          <input type="submit">
+      </p>
+
+    </form>
+    
+ ## post 방식
+ 
+ ### 데이터 저장
+    var qs = require('querystring');
+    else if (pathname=="/create_process"){
+        var body = '';
+        request.on('data', function(data){
+            body = body + data;
+        });
+        
+        request.on('end', function(){
+           var post = qs.parse(body);
+           var title = post.title;
+           var description = post.description;
+       });
+    }
+
+### 파일 생성
+
+    fs.writeFile(`data/${title}`, description, 'utf8', function(err){
+            response.writeHead(302, {Location: `/?id=${title}`});
+            response.end();
+    })
+    
+    
+### 파일 수정
+
+수정할 링크(파일)
+
+    else if(pathname === '/update'){
+          fs.readdir('./data', function(error, filelist){
+            fs.readFile(`data/${queryData.id}`, 'utf8', function(err, description){
+              var title = queryData.id;
+              var list = templateList(filelist);
+              var template = templateHTML(title, list,
+                `
+                <form action="/update_process" method="post">
+                  <input type="hidden" name="id" value="${title}">
+                  <p><input type="text" name="title" placeholder="title" value="${title}"></p>
+                  <p>
+                    <textarea name="description" placeholder="description">${description}</textarea>
+                  </p>
+                  <p>
+                    <input type="submit">
+                  </p>
+                </form>
+                `,
+                `<a href="/create">create</a> <a href="/update?id=${title}">update</a>`
+              );
+              response.writeHead(200);
+              response.end(template);
+            });
+          });
+        } 
+
+
+수정된 내용 저장
+
+      else if (pathname=="/update_process"){
+            var body = '';
+            request.on('data', function(data){
+                body = body + data;
+            });
+            request.on('end', function(){
+                var post = qs.parse(body);
+                var id=post.id;
+                var title = post.title;
+                var description = post.description;
+                fs.rename(`data/${id}`, `data/${title}`, function(error){
+                  fs.writeFile(`data/${title}`, description, 'utf8', function(err){
+                    response.writeHead(302, {Location: `/?id=${title}`});
+                    response.end(); })
+                })
+            });
+          }
+ 
+ ## 파일 삭제
+ 
+ 삭제 버튼
+ 
+     else {
+            fs.readdir('./data', function(error, filelist){
+              fs.readFile(`data/${queryData.id}`, 'utf8', function(err, description){
+              
+                var title = queryData.id;
+                var list = templateList(filelist);
+                var template = templateHTML(title, list,
+                  `<h2>${title}</h2>${description}`,
+                  `<a href="/create">create</a>
+                   <a href="/update?id=${title}">update</a>
+                   
+                   // 반드시 post방식으로 구현해야한다.
+                   <form action = "delete_process" method = "post">
+                    <input type="hidden", name = "id" value = "${title}">
+                    <input type ="submit" value = "delete">
+                   </form> `
+                   
+                );
+                response.writeHead(200);
+                response.end(template);
+              });
+            });
+          }
+  
+  삭제 버튼 구현
+  
+      else if (pathname=="/delete_process"){
+          var body = '';
+          request.on('data', function(data){
+              body = body + data;
+          });
+          request.on('end', function(){
+              var post = qs.parse(body);
+              var id=post.id;
+              fs.unlink(`data/${id}`,function(error){
+                response.writeHead(302, {Location: `/`});
+                  response.end(); })
+            });
+          }
