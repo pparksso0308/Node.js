@@ -100,7 +100,7 @@ url.parse() 메소드 : url을 분해해 각각 저장한다.
     
  ## 파일 읽기
  
-    * fs.readFile
+    * fs.readFile(path[,options],callback)
 
     const fs = require('fs');   //file system
     fs.readFile('sample.txt', function(err, data){
@@ -435,3 +435,25 @@ muse.js
 
 ## 출력 정보에 대한 보안
  
+ '<' === &lt
+ '>' === &gt
+ 
+ 
+ 
+ 
+ 
+ 
+ ### sanitize
+ 
+    var sanitizeHtml = require('sanitize-html');
+ 
+    var sanitizedTitle = sanitizeHtml(title);
+            var sanitizedDescription = sanitizeHtml(description, {
+              allowedTags:['h1']                                          // h1 태그는 허용
+            });
+              
+              
+    
+              
+              
+    
