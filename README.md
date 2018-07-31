@@ -397,3 +397,41 @@ data디렉토리에 있는 파일의 목록을 배열로 전달
                   response.end(); })
             });
           }
+ 
+ 
+ ## 모듈
+ 독립적인 기능을 갖는 단위
+ 
+mpart.js 
+
+     var M = {
+        v:'V',
+        f:function(){
+            console.log(this.v);
+        }
+     }
+     module.exports=M;    // M이 가리키는 객체를 이 모듈 밖에서 사용할 수 있다.
+
+muse.js
+
+    ar part = require('./mpart.js');
+    part.f();
+
+실행결과
+
+    Object {v: "V", f: }
+    V
+
+## 입력 정보에 대한 보안
+
+          fs.readFile(`data/${queryData.id}`, 'utf8', function(err, description){
+
+
+변경
+
+          var filteredId = path.parse(queryData.id).base;
+          fs.readFile(`data/${filteredId}`, 'utf8', function(err, description){
+     
+
+## 출력 정보에 대한 보안
+ 
